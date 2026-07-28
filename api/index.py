@@ -80,10 +80,24 @@ def render_index_html() -> bytes:
   input[type=text] { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
   button { padding: 10px 18px; border: none; border-radius: 6px; background: #2d6cdf; color: #fff; cursor: pointer; }
   button:disabled { background: #999; cursor: default; }
+  .demo-intro { background: #eef4ff; border: 1px solid #cfe0ff; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; line-height: 1.7; color: #333; }
+  .demo-intro dt { font-weight: bold; margin-top: 8px; }
+  .demo-intro dt:first-child { margin-top: 0; }
+  .demo-intro dd { margin: 0 0 2px 0; }
 </style>
 </head>
 <body>
 <h1>faq-router — 問い合わせ自動振り分け（デモ・ローカル版）</h1>
+<div class="demo-intro">
+  <dl>
+    <dt>想定シーン</dt>
+    <dd>問い合わせフォームやメールで届く質問に対し、担当者が毎回同じ内容の一次返信を手打ちしている状態を自動化したい場面を想定しています（受託開発・制作会社等の窓口対応など）。</dd>
+    <dt>読み込んでいるデータ</dt>
+    <dd>categories.json に定義した「料金」「納期」「技術質問」「その他」の4カテゴリです。各カテゴリにキーワード（例: 料金＝「料金・費用・いくら・見積」等）とサンプル問い合わせ文、定型の一次返信文が設定されています。</dd>
+    <dt>見てほしいポイント</dt>
+    <dd>キーワードルール→TF-IDF類似度→LLM分類の順にフォールバックする3段階構成で、APIキー未設定でも標準ライブラリのみでカテゴリ判定と定型返信が動作します。回答の下に表示される「判定方式」で、どの段階で振り分けられたかを確認できます。</dd>
+  </dl>
+</div>
 <div id="log"><div class="msg bot">お問い合わせ文を入力してください（例: 料金を教えてください）</div></div>
 <form id="form">
   <input type="text" id="question" placeholder="問い合わせ文を入力" autocomplete="off">
